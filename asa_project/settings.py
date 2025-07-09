@@ -22,13 +22,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ig+i5s#%wfql(l36#av8=&r-b7hlc6oh5vo&r)l^f*jo08b$-6'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-ig+i5s#%wfql(l36#av8=&r-b7hlc6oh5vo&r)l^f*jo08b$-6')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 # Hosts/domain names that are valid for this site
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'ankpastudents.org', 'www.ankpastudents.org']
+ALLOWED_HOSTS = [
+    'localhost', 
+    '127.0.0.1', 
+    'ankpastudents.org', 
+    'www.ankpastudents.org',
+    'naas-national.onrender.com',
+    '.onrender.com',
+    '.vercel.app',
+    '.now.sh'
+]
 
 # Custom error handlers
 handler404 = 'core.views.handler404'
