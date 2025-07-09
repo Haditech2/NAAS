@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h2 class="mb-4">Welcome, {{ user.first_name }}!</h2>
+                    <p class="lead">This is your NAAS member dashboard.</p>
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="{% url 'accounts:profile' %}" class="btn btn-primary btn-lg">View Profile</a>
+                        <a href="{% url 'accounts:generate_id_card' %}" class="btn btn-outline-success">Download ID Card</a>
+                        {% if user.executive_profile %}
+                        <a href="{% url 'accounts:executive_id_card' %}" class="btn btn-outline-info">Download Executive ID Card</a>
+                        {% endif %}
+                        <a href="{% url 'accounts:edit_profile' %}" class="btn btn-outline-secondary">Edit Profile</a>
+                        <a href="{% url 'accounts:password_change' %}" class="btn btn-outline-warning">Change Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

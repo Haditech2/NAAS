@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">{{ chapter.name }} Chapter</h2>
+    {% if chapter.picture %}
+    <div class="text-center mb-4">
+        <img src="{{ chapter.picture.url }}" alt="{{ chapter.name }} Picture" class="img-fluid rounded" style="max-height: 200px; object-fit: cover;">
+    </div>
+    {% else %}
+    <div class="text-center mb-4">
+        <img src="{% static 'images/default-chapter.png' %}" alt="No Picture" class="img-fluid rounded" style="max-height: 200px; object-fit: cover;">
+    </div>
+    {% endif %}
+    <div class="mb-4">
+        <p>{{ chapter.description }}</p>
+        {% if chapter.contact %}
+        <p><strong>Contact:</strong> {{ chapter.contact }}</p>
+        {% endif %}
+    </div>
+    <h4 class="mb-3">Chapter Executives</h4>
+    <div class="row justify-content-center">
+        {% for exco in executives %}
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if exco.photo_name %}
+                <img src="{% static 'images/executives/' %}{{ exco.photo_name }}" class="card-img-top" alt="{{ exco.name }}">
+                {% else %}
+                <img src="{% static 'images/executives/default.png' %}" class="card-img-top" alt="No Photo">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ exco.name }}</h5>
+                    <p class="card-text"><strong>{{ exco.role }}</strong></p>
+                    {% if exco.bio %}
+                    <p class="card-text small">{{ exco.bio }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12"><p class="text-center">No executives listed for this chapter yet.</p></div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 

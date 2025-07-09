@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ news.title }} - {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <article>
+        <h1>{{ news.title }}</h1>
+        
+        <div class="mb-4 text-muted">
+            <span>{{ news.published_date|date:"F j, Y" }}</span>
+            {% if news.author %}
+            <span class="mx-2">•</span>
+            <span>By {{ news.author.get_full_name }}</span>
+            {% endif %}
+            <span class="mx-2">•</span>
+            <span class="badge bg-primary">{{ news.get_category_display }}</span>
+        </div>
+        
+        {% if news.featured_image %}
+        <img src="{{ news.featured_image.url }}" class="img-fluid mb-4 rounded" alt="{{ news.title }}">
+        {% endif %}
+        
+        <div class="news-content">
+            {{ news.content|linebreaks }}
+        </div>
+        
+        <a href="{% url 'core:news_list' %}" class="btn btn-outline-primary mt-4">
+            <i class="fas fa-arrow-left me-2"></i>Back to News
+        </a>
+    </article>
+</div>
+{% endblock %}

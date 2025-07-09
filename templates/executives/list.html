@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Executive Team - {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Executive Team</h1>
+    
+    <div class="row">
+        {% for executive in executives %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                {% if executive.photo %}
+                <img src="{{ executive.photo.url }}" class="card-img-top" alt="{{ executive.user.get_full_name }}">
+                {% else %}
+                <div class="text-center py-5 bg-light">
+                    <i class="fas fa-user fa-5x text-muted"></i>
+                </div>
+                {% endif %}
+                
+                <div class="card-body">
+                    <h3 class="h5 card-title">{{ executive.user.get_full_name }}</h3>
+                    <p class="text-primary">{{ executive.get_position_display }}</p>
+                    
+                    {% if executive.bio %}
+                    <p class="card-text">{{ executive.bio|truncatewords:30 }}</p>
+                    {% endif %}
+                </div>
+                
+                <div class="card-footer bg-white">
+                    <small class="text-muted">
+                        {{ executive.start_date|date:"Y" }}
+                        {% if executive.end_date %}
+                        - {{ executive.end_date|date:"Y" }}
+                        {% else %}
+                        - Present
+                        {% endif %}
+                    </small>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>No executive members available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

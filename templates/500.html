@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Server Error - National Association of Ankpa Students{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="error-template">
+                <h1 class="display-1 text-danger">500</h1>
+                <h2 class="display-4">Server Error</h2>
+                <div class="error-details mb-4">
+                    Oops! Something went wrong on our end. Our team has been notified and we're working to fix the issue.
+                    Please try again later or contact support if the problem persists.
+                </div>
+                <div class="error-actions">
+                    <a href="{% url 'core:home' %}" class="btn btn-primary btn-lg me-2">
+                        <i class="fas fa-home me-2"></i>Return Home
+                    </a>
+                    <a href="{% url 'core:contact' %}" class="btn btn-outline-danger btn-lg">
+                        <i class="fas fa-bug me-2"></i>Report Issue
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .error-template {
+        padding: 40px 15px;
+        text-align: center;
+    }
+    
+    .error-actions {
+        margin-top: 30px;
+    }
+    
+    .error-actions .btn {
+        margin-right: 10px;
+    }
+    
+    .display-1 {
+        font-size: 10rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+    
+    .display-4 {
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+    
+    .error-details {
+        font-size: 1.25rem;
+        color: #6c757d;
+        margin-bottom: 2rem;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h2 class="mb-4">My Profile</h2>
+                    {% if user.profile_picture %}
+                        <img src="{{ user.profile_picture.url }}" class="rounded-circle mb-3" width="120" height="120" alt="Profile Picture">
+                    {% else %}
+                        <img src="{% static 'images/default-profile.png' %}" class="rounded-circle mb-3" width="120" height="120" alt="Profile Picture">
+                    {% endif %}
+                    <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                    <p class="mb-1"><strong>Email:</strong> {{ user.email }}</p>
+                    <p class="mb-1"><strong>School:</strong> {{ user.school }}</p>
+                    <p class="mb-1"><strong>Level:</strong> {{ user.level }}</p>
+                    <p class="mb-1"><strong>Department:</strong> {{ user.department }}</p>
+                    <p class="mb-1"><strong>Phone:</strong> {{ user.phone }}</p>
+                    <p class="mb-1"><strong>LGA/Ward:</strong> {{ user.lga_ward }}</p>
+                    <a href="{% url 'accounts:generate_id_card' %}" class="btn btn-primary mt-3">Download ID Card</a>
+                    <a href="{% url 'accounts:edit_profile' %}" class="btn btn-outline-secondary mt-2">Edit Profile</a>
+                    <a href="{% url 'accounts:password_change' %}" class="btn btn-outline-warning mt-2">Change Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

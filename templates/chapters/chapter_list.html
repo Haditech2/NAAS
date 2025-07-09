@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">ASA Chapters Nationwide</h2>
+    <div class="row justify-content-center">
+        {% for chapter in chapters %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if chapter.picture %}
+                <img src="{{ chapter.picture.url }}" class="card-img-top" alt="{{ chapter.name }} Picture" style="max-height: 150px; object-fit: cover;">
+                {% else %}
+                <img src="{% static 'images/default-chapter.png' %}" class="card-img-top" alt="No Picture" style="max-height: 150px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ chapter.name }}</h5>
+                    <p class="card-text">{{ chapter.description|truncatewords:20 }}</p>
+                    <a href="{% url 'chapter_detail' chapter.pk %}" class="btn btn-primary">View Chapter</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 

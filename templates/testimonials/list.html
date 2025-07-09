@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Testimonials - {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Student Testimonials</h1>
+    
+    <div class="row">
+        {% for testimonial in testimonials %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{ testimonial.content }}</p>
+                        <footer class="blockquote-footer mt-3">
+                            {{ testimonial.author }}
+                            {% if testimonial.role %}
+                            <cite>, {{ testimonial.role }}</cite>
+                            {% endif %}
+                        </footer>
+                    </blockquote>
+                </div>
+                
+                {% if testimonial.is_featured %}
+                <div class="card-footer bg-white text-end">
+                    <span class="badge bg-primary">Featured</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>No testimonials available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

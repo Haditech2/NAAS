@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">National Executive Council</h2>
+    <div class="row justify-content-center">
+        {% for exco in executives %}
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if exco.photo_name %}
+                <img src="{% static 'images/executives/' %}{{ exco.photo_name }}" class="card-img-top" alt="{{ exco.name }}">
+                {% else %}
+                <img src="{% static 'images/executives/default.png' %}" class="card-img-top" alt="No Photo">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ exco.name }}</h5>
+                    <p class="card-text"><strong>{{ exco.role }}</strong></p>
+                    {% if exco.bio %}
+                    <p class="card-text small">{{ exco.bio }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 
