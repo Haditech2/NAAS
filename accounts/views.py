@@ -36,7 +36,7 @@ def register(request):
             user.save()
             # Send activation email
             current_site = get_current_site(request)
-            subject = 'Activate Your ASA Account'
+            subject = 'Activate Your NAAS Account'
             message = render_to_string('accounts/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -81,7 +81,7 @@ def generate_id_card(request):
     p.save()
     buffer.seek(0)
     response = HttpResponse(buffer, content_type='application/pdf')
-    response['Content-Disposition'] = 'inline; filename="asa_id_card.pdf"'
+    response['Content-Disposition'] = 'inline; filename="naas_id_card.pdf"'
     return response
 
 @login_required
